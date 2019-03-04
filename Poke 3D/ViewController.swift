@@ -48,8 +48,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
         }
 
-        
-        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -69,7 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
   
         if let imageAnchor = anchor as? ARImageAnchor {
             
-            //print(imageAnchor.referenceImage.name)
+            print(imageAnchor.referenceImage.name)
             
             let plane = SCNPlane(
                 width: imageAnchor.referenceImage.physicalSize.width,
@@ -85,9 +83,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.addChildNode(planeNode)
             
             
-            if imageAnchor.referenceImage.name == "eevee-card" {
+            if let pokeCard = imageAnchor.referenceImage.name {
                 
-                if let pokeScene = SCNScene(named: "art.scnassets/Eevee.scn") {
+                if let pokeScene = SCNScene(named: String("art.scnassets/" + pokeCard + ".scn")) {
                     
                     if let pokeNode = pokeScene.rootNode.childNodes.first {
                         
@@ -95,26 +93,40 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         
                         planeNode.addChildNode(pokeNode)
                     }
-                }
-            }
-            
-            if imageAnchor.referenceImage.name == "oddish-card" {
-                if let pokeScene = SCNScene(named: "art.scnassets/Oddish.scn") {
                     
-                    if let pokeNode = pokeScene.rootNode.childNodes.first {
-                        
-                        pokeNode.eulerAngles.x = .pi / 2
-                        
-                        planeNode.addChildNode(pokeNode)
-                    }
                 }
                 
             }
+//
+//            if imageAnchor.referenceImage.name == "eevee-card" {
+//
+//                if let pokeScene = SCNScene(named: "art.scnassets/Eevee.scn") {
+//
+//                    if let pokeNode = pokeScene.rootNode.childNodes.first {
+//
+//                        pokeNode.eulerAngles.x = .pi / 2
+//
+//                        planeNode.addChildNode(pokeNode)
+//                    }
+//                }
+//            }
+//
+//            if imageAnchor.referenceImage.name == "oddish-card" {
+//                if let pokeScene = SCNScene(named: "art.scnassets/Oddish.scn") {
+//
+//                    if let pokeNode = pokeScene.rootNode.childNodes.first {
+//
+//                        pokeNode.eulerAngles.x = .pi / 2
+//
+//                        planeNode.addChildNode(pokeNode)
+//                    }
+//                }
+//
+//            }
             
        
            
         }
-        
         
         return node
         
